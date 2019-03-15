@@ -6,7 +6,12 @@ var upload = multer({ dest: './public/csv/' });
 var apiCtrl=require('./../controllers/apiCtrl');
 
 router.get('/home', apiCtrl.showHome);
+
 router.post('/upload',upload.single('myfile'),apiCtrl.uploadFile);
 router.get('/dashboard/sales/:startDate/:endDate',apiCtrl.getSalesData);
+
+router.post('/team/bulk-create',upload.single('myTeamsFile'),apiCtrl.createBulkTeam);
+// router.get('/dashboard/teams',apiCtrl.getAllTeams);
+// router.get('/dashboard/teams/:teamId',apiCtrl.getTeamById);
 
 module.exports = router;

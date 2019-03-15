@@ -71,5 +71,40 @@ module.exports={
                 res.json(docs);
             })
         })
-    }
+    },
+
+    createBulkTeam:(req,res,next)=>{
+        var fileRows = [];
+        csv.fromPath(req.file.path)
+        .on("data", function (data) {
+            var row={
+                'Name':data[0],
+                'Description':data[1],
+                'Managers':data[2],
+                'Members':data[3]
+            }
+            fileRows.push(row); 
+        })
+        .on("end", function () {
+            console.log(fileRows.length);
+            MongoClient.connect(dbConfig.url,{useNewUrlParser:true},(err,db)=>{
+                if(err){
+                    console.log(err);
+                    res.json({'msg':'some error occured'});
+                }
+                var collection=db.db(dbConfig.database).collection('teams');
+                collection.insertMany(fileRows,(err,r)=>{
+                    if(err){
+                        console.log(err)
+                        res.json({'msg':'some error occured'});
+                    }
+                    console.log(r.insertedCount);
+                });
+            });
+            fs.unlinkSync(req.file.path);   //delete the csv file
+            res.json({'msg':'teams successfully created'});
+        })
+    },
+
+    
 }

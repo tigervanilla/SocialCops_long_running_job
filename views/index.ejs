@@ -7,8 +7,15 @@
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
 
+    <h1>Sales Data</h1>
     <form action="/api/upload" method="post" enctype="multipart/form-data">
       <input type="file" name="myfile" />
+      <input type="submit" value="Upload">
+    </form>
+    <hr>
+    <h1>Create Teams</h1>
+    <form action="/api/team/bulk-create" method="post" enctype="multipart/form-data">
+      <input type="file" name="myTeamsFile" />
       <input type="submit" value="Upload">
     </form>
   </body>
