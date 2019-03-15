@@ -2,6 +2,7 @@ var multer=require('multer');
 var fs = require('fs');
 var csv = require('fast-csv');
 var MongoClient=require('mongodb').MongoClient;
+var ObjectId=require('mongodb').ObjectID;
 var dbConfig=require('./../config/dbConfig');
 
 module.exports={
@@ -119,6 +120,25 @@ module.exports={
                     res.json({'msg':'some error occured'});
                 }
                 res.json(docs);
+            })
+        })
+    },
+
+    getTeamById:(req,res,next)=>{
+        var teamId=req.params.teamId;
+        MongoClient.connect(dbConfig.url,{useNewUrlParser:true},(err,db)=>{
+            if(err){
+                console.log(err);
+                res.json({'msg':'some error occured'});
+            }
+            var collection=db.db(dbConfig.database).collection('teams');
+            var filter={'_id':ObjectId(teamId)};
+            collection.findOne(filter,(err,teamDoc)=>{
+                if(err){
+                    console.log(err);
+                    res.json({'msg':'some error occured'});
+                }
+                res.json(teamDoc);
             })
         })
     }
