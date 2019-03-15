@@ -75,9 +75,17 @@ module.exports={
         })
     },
 
+    uploadBulkTeamFile:(req,res,next)=>{
+        console.log(req.file);
+        var teamFilePath=req.file.path;
+        res.render('confirm_team',{'msg':'file upload successful','filePath':teamFilePath});
+    },
+
     createBulkTeam:(req,res,next)=>{
+        console.log(req.body);
+        if(req.body.createTeam==1){
         var fileRows = [];
-        csv.fromPath(req.file.path)
+        csv.fromPath(req.body.filePath)
         .on("data", function (data) {
             var row={
                 'Name':data[0],
@@ -103,9 +111,12 @@ module.exports={
                     console.log(r.insertedCount);
                 });
             });
-            fs.unlinkSync(req.file.path);   //delete the csv file
             res.json({'msg':'teams successfully created'});
         })
+    }else{
+        fs.unlinkSync(req.body.filePath);   //delete the csv file
+        res.json({'msg':'teams discarded'});
+    }
     },
 
     getAllTeams:(req,res,next)=>{

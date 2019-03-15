@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Confirm Team</title>
+  </head>
+  <body>
+    <h1>Confirm Team?</h1>
+    <form action="/api/team/bulk-create" method="POST">
+        <input type="text" value="<%=filePath%>" name="filePath">
+        <input type="text" value="1" name="createTeam">
+        <input type="submit" value="Yes, create">
+    </form>
+    <hr>
+    <form action="/api/team/bulk-create" method="POST">
+        <input type="text" value="<%=filePath%>" name="filePath">
+        <input type="text" value="0" name="createTeam">
+        <input type="submit" value="No, cancel">
+    </form>
+  </body>
+</html>

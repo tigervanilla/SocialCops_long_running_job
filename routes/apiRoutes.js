@@ -11,7 +11,8 @@ router.post('/upload',upload.single('myfile'),apiCtrl.uploadFile);
 router.get('/dashboard/sales/:startDate/:endDate',apiCtrl.getSalesData);
 router.get('/dashboard/sales/:originalCsvName',apiCtrl.deleteSalesRecordByCsvName);
 
-router.post('/team/bulk-create',upload.single('myTeamsFile'),apiCtrl.createBulkTeam);
+router.post('/team/bulk-team-upload',upload.single('myTeamsFile'),apiCtrl.uploadBulkTeamFile);
+router.post('/team/bulk-create',apiCtrl.createBulkTeam);
 router.get('/dashboard/teams',apiCtrl.getAllTeams);
 router.get('/dashboard/teams/:teamId',apiCtrl.getTeamById);
 
