@@ -11,7 +11,7 @@ module.exports={
     },
 
     uploadFile:(req,res,next)=>{
-        console.log("Uploaded Successfull with filename : ",req.file.filename);
+        console.log("Uploaded Successfull with filename : ",req.file);
         var fileRows = [];
         csv.fromPath(req.file.path)
         .on("data", function (data) {
@@ -29,12 +29,13 @@ module.exports={
                 'unit cost':data[10],
                 'total revenue':data[11],
                 'total cost':data[12],
-                'total profit':data[13]
+                'total profit':data[13],
+                'original-csv-file':req.file.originalname
             }
             fileRows.push(row); 
         })
         .on("end", function () {
-            console.log(fileRows);
+            // console.log(fileRows);
             MongoClient.connect(dbConfig.url,{useNewUrlParser:true},(err,db)=>{
                 if(err){
                     console.log(err);
@@ -139,6 +140,25 @@ module.exports={
                     res.json({'msg':'some error occured'});
                 }
                 res.json(teamDoc);
+            })
+        })
+    },
+
+    deleteSalesRecordByCsvName:(req,res,next)=>{
+        var originalCsvName=req.params.originalCsvName;
+        MongoClient.connect(dbConfig.url,{useNewUrlParser:true},(err,db)=>{
+            if(err){
+                console.log(err);
+                res.json({'msg':'some error occured'});
+            }
+            var collection=db.db(dbConfig.database).collection('sales');
+            var filter={'original-csv-file':originalCsvName};
+            collection.deleteMany(filter,(err,result)=>{
+                if(err){
+                    console.log(err);
+                    res.json({'msg':'some error occured'});
+                }
+                res.json({'msg':'Deletion Successful'});
             })
         })
     }
