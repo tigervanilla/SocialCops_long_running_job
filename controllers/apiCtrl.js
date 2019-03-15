@@ -51,5 +51,25 @@ module.exports={
             fs.unlinkSync(req.file.path);   //delete the csv file
             res.json({'msg':'upload successful'});
         })
+    },
+
+    getSalesData:(req,res,next)=>{
+        var startDate=req.params.startDate;
+        var endDate=req.params.endDate;
+        MongoClient.connect(dbConfig.url,{useNewUrlParser:true},(err,db)=>{
+            if(err){
+                console.log(err);
+                res.json({'msg':'some error occoured'});
+            }
+            var collection=db.db(dbConfig.database).collection('sales');
+            var filter={'date':{$gte:new Date(startDate)},'date':{$lte:new Date(endDate)}}
+            collection.find(filter).toArray((err,docs)=>{
+                if(err){
+                    console.log(err);
+                    res.json({'msg':'some error occoured'});
+                }
+                res.json(docs);
+            })
+        })
     }
 }

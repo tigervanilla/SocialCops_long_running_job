@@ -7,5 +7,6 @@ var apiCtrl=require('./../controllers/apiCtrl');
 
 router.get('/home', apiCtrl.showHome);
 router.post('/upload',upload.single('myfile'),apiCtrl.uploadFile);
+router.get('/dashboard/sales/:startDate/:endDate',apiCtrl.getSalesData);
 
 module.exports = router;
