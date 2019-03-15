@@ -106,5 +106,20 @@ module.exports={
         })
     },
 
-    
+    getAllTeams:(req,res,next)=>{
+        MongoClient.connect(dbConfig.url,{useNewUrlParser:true},(err,db)=>{
+            if(err){
+                console.log(err);
+                res.json({'msg':'some error occured'});
+            }
+            var collection=db.db(dbConfig.database).collection('teams');
+            collection.find().toArray((err,docs)=>{
+                if(err){
+                    console.log(err);
+                    res.json({'msg':'some error occured'});
+                }
+                res.json(docs);
+            })
+        })
+    }
 }
