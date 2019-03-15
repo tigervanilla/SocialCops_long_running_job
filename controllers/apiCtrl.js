@@ -19,12 +19,16 @@ module.exports={
                 'country':data[1],
                 'itemtype':data[2],
                 'channel':data[3],
-                'unit sold':data[4],
-                'unit price':data[5],
-                'unit cost':data[6],
-                'total revenue':data[7],
-                'total cost':data[8],
-                'total profit':data[9]
+                'priority':data[4],
+                'date':new Date('"'+data[5]+'"'),
+                'order id':data[6],
+                'ship date':new Date('"'+data[7]+'"'),
+                'unit sold':data[8],
+                'unit price':data[9],
+                'unit cost':data[10],
+                'total revenue':data[11],
+                'total cost':data[12],
+                'total profit':data[13]
             }
             fileRows.push(row); 
         })
