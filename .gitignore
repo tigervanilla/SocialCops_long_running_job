@@ -1,0 +1,4 @@
+*.zip
+dashboard/
+node_modules/
+dummy_data/
