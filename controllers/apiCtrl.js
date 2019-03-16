@@ -21,7 +21,7 @@ module.exports={
                 'itemtype':data[2],
                 'channel':data[3],
                 'priority':data[4],
-                'date':new Date('"'+data[5]+'"'),
+                'order date':new Date('"'+data[5]+'"'),
                 'order id':data[6],
                 'ship date':new Date('"'+data[7]+'"'),
                 'unit sold':data[8],
@@ -65,13 +65,13 @@ module.exports={
                 res.json({'msg':'some error occoured'});
             }
             var collection=db.db(dbConfig.database).collection('sales');
-            var filter={'date':{$gte:new Date(startDate)},'date':{$lte:new Date(endDate)}}
+            var filter={'order date':{$gte:new Date(startDate)},'order date':{$lte:new Date(endDate)}}
             collection.find(filter).toArray((err,docs)=>{
                 if(err){
                     console.log(err);
                     res.json({'msg':'some error occoured'});
                 }
-                console.log(docs);
+                console.log(docs.length);
                 res.render('data_overview',{
                     'docs':docs,
                     'isDataAvailable':docs.length>0
