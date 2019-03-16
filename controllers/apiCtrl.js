@@ -55,9 +55,10 @@ module.exports={
         })
     },
 
-    getSalesData:(req,res,next)=>{
-        var startDate=req.params.startDate;
-        var endDate=req.params.endDate;
+    getDataOverview:(req,res,next)=>{
+        var startDate=req.body.startDate;
+        var endDate=req.body.endDate;
+        console.log(startDate,endDate)
         MongoClient.connect(dbConfig.url,{useNewUrlParser:true},(err,db)=>{
             if(err){
                 console.log(err);
@@ -70,7 +71,11 @@ module.exports={
                     console.log(err);
                     res.json({'msg':'some error occoured'});
                 }
-                res.json(docs);
+                console.log(docs);
+                res.render('data_overview',{
+                    'docs':docs,
+                    'isDataAvailable':docs.length>0
+                });
             })
         })
     },
@@ -175,5 +180,13 @@ module.exports={
                     res.json({'msg':"File Not Found"});
             })
         })
-    }
+    },
+
+    dataOverviewForm:(req,res,next)=>{
+        res.render('data_overview',{'isDataAvailable':false});
+    },
+
+    // getDataOverview:(req,res,next)=>{
+
+    // }
 }
