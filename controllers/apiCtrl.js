@@ -10,6 +10,7 @@ module.exports={
         res.render('dashboard',{'title':'Express',});
     },
 
+    // Upload csv file and add its data to database
     uploadFile:(req,res,next)=>{
         if(!req.file){
             res.json({'msg':'Invalid file'});
@@ -58,6 +59,7 @@ module.exports={
         })
     },
 
+    // sends rows of data within start-date and end-date as specified by user
     getDataOverview:(req,res,next)=>{
         var startDate=req.body.startDate;
         var endDate=req.body.endDate;
@@ -83,12 +85,14 @@ module.exports={
         })
     },
 
+    // Uploads csv file containing data to create bulk teams
     uploadBulkTeamFile:(req,res,next)=>{
         // console.log(req.file);
         var teamFilePath=req.file.path;
         res.render('confirm_team',{'msg':'file upload successful','filePath':teamFilePath});
     },
 
+    // Create bulk teams using csv file if user confirms otherwise delete the csv file
     createBulkTeam:(req,res,next)=>{
         // console.log(req.body);
         if(req.body.createTeam==1){
@@ -127,6 +131,7 @@ module.exports={
     }
     },
 
+    // Sends rows of details of all teams
     getAllTeams:(req,res,next)=>{
         MongoClient.connect(dbConfig.url,{useNewUrlParser:true},(err,db)=>{
             if(err){
@@ -148,6 +153,8 @@ module.exports={
         })
     },
 
+    // Sends detail of a team based on its _id
+    // Currently this endpoint is not used on frontend
     getTeamById:(req,res,next)=>{
         var teamId=req.params.teamId;
         MongoClient.connect(dbConfig.url,{useNewUrlParser:true},(err,db)=>{
@@ -167,6 +174,7 @@ module.exports={
         })
     },
 
+    // Deletes the records which were mistakenly uploaded, by using the original csv file name
     deleteSalesRecordByCsvName:(req,res,next)=>{
         var originalCsvName=req.body.originalCsvName;
         MongoClient.connect(dbConfig.url,{useNewUrlParser:true},(err,db)=>{
@@ -189,6 +197,7 @@ module.exports={
         })
     },
 
+    // Display form to get start-date and end-date to fetch records
     dataOverviewForm:(req,res,next)=>{
         res.render('data_overview',{'isDataAvailable':false});
     },

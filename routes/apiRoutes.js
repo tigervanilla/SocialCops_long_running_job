@@ -5,15 +5,15 @@ var upload = multer({ dest: './public/csv/' });
 
 var apiCtrl=require('./../controllers/apiCtrl');
 
-router.get('/home', apiCtrl.showHome);
+router.get('/home', apiCtrl.showHome);      //homepage
 
-router.post('/upload',upload.single('myfile'),apiCtrl.uploadFile);
-router.get('/dashboard/overview',apiCtrl.dataOverviewForm);
-router.post('/dashboard/overview',apiCtrl.getDataOverview);
-router.post('/dashboard/sales-delete',apiCtrl.deleteSalesRecordByCsvName);
-router.post('/team/bulk-team-upload',upload.single('myTeamsFile'),apiCtrl.uploadBulkTeamFile);
-router.post('/team/bulk-create',apiCtrl.createBulkTeam);
-router.get('/dashboard/teams',apiCtrl.getAllTeams);
-router.get('/dashboard/teams/:teamId',apiCtrl.getTeamById);
+router.post('/upload',upload.single('myfile'),apiCtrl.uploadFile); //upload data file
+router.get('/dashboard/overview',apiCtrl.dataOverviewForm); //form to get start and end dates
+router.post('/dashboard/overview',apiCtrl.getDataOverview); //data rows within start and end dates
+router.post('/dashboard/sales-delete',apiCtrl.deleteSalesRecordByCsvName);  //delete sales data using csv name
+router.post('/team/bulk-team-upload',upload.single('myTeamsFile'),apiCtrl.uploadBulkTeamFile); //upload teams.csv
+router.post('/team/bulk-create',apiCtrl.createBulkTeam); //create bulk teams using csv file
+router.get('/dashboard/teams',apiCtrl.getAllTeams); //sends rows of all teams
+router.get('/dashboard/teams/:teamId',apiCtrl.getTeamById); //sends a particular team
 
 module.exports = router;
