@@ -156,7 +156,7 @@ module.exports={
     },
 
     deleteSalesRecordByCsvName:(req,res,next)=>{
-        var originalCsvName=req.params.originalCsvName;
+        var originalCsvName=req.body.originalCsvName;
         MongoClient.connect(dbConfig.url,{useNewUrlParser:true},(err,db)=>{
             if(err){
                 console.log(err);
@@ -169,7 +169,10 @@ module.exports={
                     console.log(err);
                     res.json({'msg':'some error occured'});
                 }
-                res.json({'msg':'Deletion Successful'});
+                if(result.deletedCount!=0)
+                    res.json({'msg':result.deletedCount+" Records Deleted"});
+                else
+                    res.json({'msg':"File Not Found"});
             })
         })
     }

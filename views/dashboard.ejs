@@ -29,16 +29,16 @@
         </div>
       </div>
       <div class="col-sm">
-        <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title">Create Team</h5>
-            <p class="card-text">Quickly create bulk teams by uploading CSV file</p>
-            <form action="/api/team/bulk-team-upload" method="post" enctype="multipart/form-data">
-              <input type="file" name="myTeamsFile" class="mb-1" />
-              <input type="submit" value="Upload" class="btn btn-primary btn-block">
-            </form>
-          </div>
-        </div>
+          <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">Remove Data</h5>
+                <p class="card-text">Undo recent baseline upload.</p>
+                <form action="/api/dashboard/sales-delete" method="post">
+                  <input type="text" name="originalCsvName" placeholder="Enter the name of CSV File" class="btn-block" required>
+                  <input type="submit" class="btn btn-danger btn-block" value="Submit">
+                </form>
+              </div>
+            </div>
       </div>
       <div class="col-sm">
         <div class="card" style="width: 18rem;">
@@ -64,16 +64,18 @@
               </div>
             </div>
       </div>
-      <!-- <div class="col-sm">
+      <div class="col-sm">
           <div class="card" style="width: 18rem;">
-              <div class="card-body">
-                <h5 class="card-title">Remove Data</h5>
-                <p class="card-text">Undo recent baseline upload.</p>
-                <form action="" method="post"></form>
-                <a href="/api/dashboard/teams"><button class="btn btn-primary btn-block">Go</button></a>
-              </div>
+            <div class="card-body">
+              <h5 class="card-title">Create Team</h5>
+              <p class="card-text">Quickly create bulk teams by uploading CSV file</p>
+              <form action="/api/team/bulk-team-upload" method="post" enctype="multipart/form-data">
+                <input type="file" name="myTeamsFile" class="mb-1" />
+                <input type="submit" value="Upload" class="btn btn-primary btn-block">
+              </form>
             </div>
-      </div> -->
+          </div>
+        </div>
     </div>
   </div>
 </body>
