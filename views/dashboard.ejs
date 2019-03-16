@@ -14,8 +14,8 @@
 <body>
   <% include navbar.ejs %>
 
-  <div class="container mt-5 pt-5">
-    <div class="row">
+  <div class="container mt-5 pt-5 justify-content-start">
+    <div class="row mb-2">
       <div class="col-sm">
         <div class="card" style="width: 18rem;">
           <div class="card-body">
@@ -32,7 +32,7 @@
           <div class="card" style="width: 18rem;">
               <div class="card-body">
                 <h5 class="card-title">Remove Data</h5>
-                <p class="card-text">Undo recent baseline upload.</p>
+                <p class="card-text">Undo recent baseline upload. Be Careful!!</p>
                 <form action="/api/dashboard/sales-delete" method="post">
                   <input type="text" name="originalCsvName" placeholder="Enter the name of CSV File" class="btn-block" required>
                   <input type="submit" class="btn btn-danger btn-block" value="Submit">
@@ -54,17 +54,8 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col-sm">
-          <div class="card" style="width: 18rem;">
-              <div class="card-body">
-                <h5 class="card-title">Teams</h5>
-                <p class="card-text">All the teams at one place.</p>
-                <a href="/api/dashboard/teams"><button class="btn btn-primary btn-block">Go</button></a>
-              </div>
-            </div>
-      </div>
-      <div class="col-sm">
+    <div class="row mb-2 justify-content-start">
+      <div class="col-sm-4">
           <div class="card" style="width: 18rem;">
             <div class="card-body">
               <h5 class="card-title">Create Team</h5>
@@ -76,6 +67,16 @@
             </div>
           </div>
         </div>
+      <div class="col-sm-4">
+          <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">Teams</h5>
+                <p class="card-text">Quick Glance over all the teams in one place.</p>
+                <br>
+                <a href="/api/dashboard/teams"><button class="btn btn-primary btn-block">Go</button></a>
+              </div>
+            </div>
+      </div>
     </div>
   </div>
 </body>
