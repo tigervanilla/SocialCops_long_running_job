@@ -11,7 +11,10 @@ module.exports={
     },
 
     uploadFile:(req,res,next)=>{
-        console.log("Uploaded Successfull with filename : ",req.file);
+        if(!req.file){
+            res.json({'msg':'Invalid file'});
+        }
+        console.log("Upload Successfull with filename : ",req.file);
         var fileRows = [];
         csv.fromPath(req.file.path)
         .on("data", function (data) {
@@ -58,7 +61,7 @@ module.exports={
     getDataOverview:(req,res,next)=>{
         var startDate=req.body.startDate;
         var endDate=req.body.endDate;
-        console.log(startDate,endDate)
+        // console.log(startDate,endDate)
         MongoClient.connect(dbConfig.url,{useNewUrlParser:true},(err,db)=>{
             if(err){
                 console.log(err);
@@ -71,7 +74,7 @@ module.exports={
                     console.log(err);
                     res.json({'msg':'some error occoured'});
                 }
-                console.log(docs.length);
+                // console.log(docs.length);
                 res.render('data_overview',{
                     'docs':docs,
                     'isDataAvailable':docs.length>0
@@ -81,13 +84,13 @@ module.exports={
     },
 
     uploadBulkTeamFile:(req,res,next)=>{
-        console.log(req.file);
+        // console.log(req.file);
         var teamFilePath=req.file.path;
         res.render('confirm_team',{'msg':'file upload successful','filePath':teamFilePath});
     },
 
     createBulkTeam:(req,res,next)=>{
-        console.log(req.body);
+        // console.log(req.body);
         if(req.body.createTeam==1){
         var fileRows = [];
         csv.fromPath(req.body.filePath)
@@ -101,7 +104,7 @@ module.exports={
             fileRows.push(row); 
         })
         .on("end", function () {
-            console.log(fileRows.length);
+            // console.log(fileRows.length);
             MongoClient.connect(dbConfig.url,{useNewUrlParser:true},(err,db)=>{
                 if(err){
                     console.log(err);
@@ -113,7 +116,7 @@ module.exports={
                         console.log(err)
                         res.json({'msg':'some error occured'});
                     }
-                    console.log(r.insertedCount);
+                    // console.log(r.insertedCount);
                 });
             });
             res.json({'msg':'teams successfully created'});
@@ -189,8 +192,4 @@ module.exports={
     dataOverviewForm:(req,res,next)=>{
         res.render('data_overview',{'isDataAvailable':false});
     },
-
-    // getDataOverview:(req,res,next)=>{
-
-    // }
 }

@@ -32,10 +32,8 @@
 
   <table class="table table-hover mt-5">
     <% if(isDataAvailable) {%>
-
     <tbody>
         <% for(var i=0;i<docs.length;i++){ %>
-
       <tr>
           <% for(var key in docs[i]) {%>
            <td> <%= docs[i][key] %> </td>
@@ -45,9 +43,5 @@
     </tbody>
     <% } %>
   </table>
-
-
-
 </body>
-
 </html>
