@@ -7,7 +7,7 @@ var dbConfig=require('./../config/dbConfig');
 
 module.exports={
     showHome:(req,res,next)=>{
-        res.render('index',{'title':'Express',});
+        res.render('dashboard',{'title':'Express',});
     },
 
     uploadFile:(req,res,next)=>{

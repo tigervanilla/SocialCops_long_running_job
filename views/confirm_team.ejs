@@ -1,20 +1,44 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Confirm Team</title>
-  </head>
-  <body>
-    <h1>Confirm Team?</h1>
-    <form action="/api/team/bulk-create" method="POST">
-        <input type="text" value="<%=filePath%>" name="filePath">
-        <input type="text" value="1" name="createTeam">
-        <input type="submit" value="Yes, create">
-    </form>
-    <hr>
-    <form action="/api/team/bulk-create" method="POST">
-        <input type="text" value="<%=filePath%>" name="filePath">
-        <input type="text" value="0" name="createTeam">
-        <input type="submit" value="No, cancel">
-    </form>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Collect | Manage Organization</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/dashboard.css">
+  <script src="/javascripts/dashboard.js"></script>
+</head>
+
+<body>
+  <% include navbar.ejs %>
+
+  <div class="container mt-5 pt-5 text-center">
+    <div class="row">
+      <div class="col-sm">
+        <h1>Confirm Team?</h1>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-sm">
+        <form action="/api/team/bulk-create" method="POST">
+          <input type="text" value="<%=filePath%>" name="filePath" hidden>
+          <input type="text" value="1" name="createTeam" hidden>
+          <input type="submit" class="btn btn-primary" value="Yes, create">
+        </form>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-sm">
+        <form action="/api/team/bulk-create" method="POST">
+          <input type="text" value="<%=filePath%>" name="filePath" hidden>
+          <input type="text" value="0" name="createTeam" hidden>
+          <input type="submit" class="btn btn-danger" value="No, cancel">
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+
 </html>

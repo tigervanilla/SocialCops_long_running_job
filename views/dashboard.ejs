@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Collect | Manage Organization</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/dashboard.css">
+  <script src="/javascripts/dashboard.js"></script>
+</head>
+
+<body>
+  <% include navbar.ejs %>
+
+  <div class="container mt-5 pt-5">
+    <div class="row">
+      <div class="col-sm">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">Baseline Upload</h5>
+            <p class="card-text">Quickly upload your data by uploading it in a CSV file.</p>
+            <form action="/api/upload" method="post" enctype="multipart/form-data">
+              <input type="file" name="myfile" class="mb-1" />
+              <input type="submit" value="Upload" class="btn btn-primary btn-block">
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">Create Team</h5>
+            <p class="card-text">Quickly create bulk teams by uploading CSV file</p>
+            <form action="/api/team/bulk-team-upload" method="post" enctype="multipart/form-data">
+              <input type="file" name="myTeamsFile" class="mb-1" />
+              <input type="submit" value="Upload" class="btn btn-primary btn-block">
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title">Overview</h5>
+            <p class="card-text">A quick glance over your data. Choose dates to focus on a subset of it.</p>
+            <form action="www.duckduckgo.com">
+              From <input type="date" class="mb-1" required>
+              To <input type="date" class="mb-1" required> <br>
+              <input type="submit" value="Go" class="btn btn-primary btn-block">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+          <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">Teams</h5>
+                <p class="card-text">All the teams at one place.</p>
+                <a href="/api/dashboard/teams"><button class="btn btn-primary btn-block">Go</button></a>
+              </div>
+            </div>
+      </div>
+      <!-- <div class="col-sm">
+          <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">Remove Data</h5>
+                <p class="card-text">Undo recent baseline upload.</p>
+                <form action="" method="post"></form>
+                <a href="/api/dashboard/teams"><button class="btn btn-primary btn-block">Go</button></a>
+              </div>
+            </div>
+      </div> -->
+    </div>
+  </div>
+</body>
+
+</html>
