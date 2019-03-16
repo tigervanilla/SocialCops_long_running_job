@@ -136,7 +136,11 @@ module.exports={
                     console.log(err);
                     res.json({'msg':'some error occured'});
                 }
-                res.json(docs);
+                res.render('teams',{
+                    'docs':docs,
+                    'isDataAvailable':docs.length>0
+                })
+                // res.json(docs);
             })
         })
     },

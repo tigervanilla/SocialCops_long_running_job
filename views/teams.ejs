@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Collect | Manage Organization</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="/stylesheets/dashboard.css">
+  <script src="/javascripts/dashboard.js"></script>
+</head>
+
+<body>
+  <% include navbar.ejs %>
+
+  <table class="table table-hover mt-5">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Managers</th>
+        <th scope="col" class="text-center">Members</th>
+      </tr>
+    </thead>
+    <% if(isDataAvailable) {%>
+
+    <tbody>
+        <% for(var i=1;i<docs.length;i++){ %>
+
+      <tr>
+          <% for(var key in docs[i]) {%>
+           <td> <%= docs[i][key] %> </td>
+           <% } %>
+      </tr>
+      <% } %>
+    </tbody>
+    <% } %>
+  </table>
+
+  <div>
+</body>
+
+</html>
