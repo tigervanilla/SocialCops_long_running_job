@@ -6,3 +6,4 @@
    <b>localhost:80/api/home</b> <br>
 6. Please use csv files in <b>dummy_data folder</b> for testing purpose<br>
 7. Command to tear down : docker-compose down <br>
+![Alt text](/public/images/home.png?raw=true "Optional Title")
